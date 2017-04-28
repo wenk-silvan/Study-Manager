@@ -1,0 +1,93 @@
+
+#subjects h1 {
+    text-align: center;
+}
+
+#subjects .card-wrapper {
+    margin-bottom: 2rem;
+}
+
+#subjects .card-wrapper .img-fluid {
+    height: 10rem;
+    background-size: cover!important;
+}
+
+#subjects .btn-open {
+    padding: .85rem 1.5rem;
+    float: right;
+}
+
+#subjects .btn-add-task {
+    margin-left: 0rem;
+}
+
+#subjects .card-backside .card {
+    height: 18.3rem;
+    overflow-y: auto;
+}
+
+#subjects .btn-done, #subjects .btn-todo, #subjects .btn-trash  {
+    border-radius: 2rem;
+    padding: 0.5rem;
+    margin: 0px 6px;
+}
+
+#subjects .btn-file {
+    border-radius: 2rem;
+}
+
+#subjects .btn-add-task, #subjects .btn-remove, #subjects .btn-close {
+    padding: 0.8rem 0.6rem;
+    width: 5rem;
+    border-radius: 2rem;
+}
+
+#subjects .btn-trash {
+    margin-right: 0rem;
+}
+
+#subjects .todo-item .fa {
+    font-size: 1rem;
+}
+
+#subjects .todo-item hr {
+    margin: 0.3rem 0rem;
+}
+
+.subject {
+    width: 100%;
+    word-break: break-all;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+#subjects .btn-add {
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+#subjects .btn-add:hover, #subjects .btn-done:hover {
+    background-color: #00C851;
+    color: white!important;
+}
+
+#subjects .btn-todo:hover, #subjects .btn-trash:hover  {
+    background-color: #a6c;
+    color: white!important;
+}
+
+#subjects .btn-file:hover {
+    background-color: #2BBBAD;
+    color: white!important;
+}
+
+#subjects .btn-status {
+    text-align: right;
+}
+
+#subjects .btns-action {
+    margin: 0rem 0rem 0.5rem 0rem;
+    text-align: right;
+}

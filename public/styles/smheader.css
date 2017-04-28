@@ -1,0 +1,38 @@
+#header {
+    position: relative;
+    z-index: 5;
+    height: 20rem;
+}
+
+#header .row {
+    margin: 0px;
+}
+
+#header .jumbotron {
+    position: absolute;
+    z-index: -1;
+    right: 0px; left: 0px; top: 0px; bottom: 0px;
+    background: url("/public/images/books_1.jpg") no-repeat center center;
+    background-size: cover;
+    -webkit-filter: contrast(60%);
+    filter: contrast(60%);
+}
+
+#header .spaceholder {
+    height: 6rem;
+    width: 100%;
+}
+
+#header .jumbotron-title {
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    width: 100%;
+    margin-bottom: 2rem!important;
+}
+
+#header .jumbotron-subtitle {
+    color: #ccc;
+    text-align: center;
+    width: 100%;
+}
