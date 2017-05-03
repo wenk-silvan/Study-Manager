@@ -10,6 +10,7 @@
             {{{app}}}
             {{{script}}}
 
+            <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
             <script src="node_modules/mdbootstrap/js/jquery-2.2.3.min.js"></script>
             <script src="node_modules/mdbootstrap/js/tether.min.js"></script>
             <script src="node_modules/mdbootstrap/js/bootstrap.min.js"></script>

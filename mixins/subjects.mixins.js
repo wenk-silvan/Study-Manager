@@ -1,12 +1,11 @@
 var path = require('path');
-var subjects = require('../data/subjects.data.js');
 
 module.exports = {
     data(){
         return {
             selectedSubject: {},
             newTask: "",
-            subjects: subjects.data.subjects,
+            subjects: [],
             newSubject : {
                 title: '',
                 imageName: ''
@@ -21,7 +20,7 @@ module.exports = {
             });
         },
         add: function(subject) {
-            console.log(this.subjects)
+            console.log(this.subjects);
             let title = subject.title;
             if(title === "") title = "Example";
             let image = subject.imageName;
@@ -51,6 +50,13 @@ module.exports = {
             if(count == 0) return "Nothing to do here!";
             if(count == 1) return "One unfinished task!";
             return count.toString() + " unfinished tasks!";
+        },
+        getSubjects: function() {
+            this.$http.get('/subjects').then(response => {
+                this.subjects = response.body;
+            }, response => {
+                return "Server error: " + response;
+            });
         },
         addTask: function(task, subject) {
             let name = task;

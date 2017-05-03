@@ -2,8 +2,11 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var express = require('express');
 var expressVue = require('express-vue');
+var mongoose = require('mongoose');
 var app = express();
+require('./routes')(app);
 
+mongoose.connect('localhost:27017/study-manager');
 
 app.engine('vue', expressVue);
 app.set('view engine', 'vue');
@@ -16,36 +19,11 @@ app.use('/node_modules', express.static(__dirname + '/node_modules/'));
 app.use('/public', express.static(__dirname + '/public/'));
 app.use(favicon(path.join(__dirname,'public','images','favicon.png')));
 
-var pageTitle = 'Study Manager';
-var mixins = [
-    require(path.join(__dirname, '/mixins/subjects.mixins.js'))
-];
-
-app.get('/', function(req, res){
-    var scope = {
-        data: {
-            title: pageTitle
-        },
-        vue: {
-            head: {
-                title: pageTitle,
-                meta: [
-                    //Styles
-                    { style: '/node_modules/mdbootstrap/css/bootstrap.min.css' },
-                    { style: '/node_modules/mdbootstrap/css/mdb.min.css' },
-                    { style: '/node_modules/font-awesome/css/font-awesome.min.css' },
-                    { style: '/public/styles/smheader.css' },
-                    { style: '/public/styles/smfooter.css' },
-                    { style: '/public/styles/subjects.css' },
-                    //Scripts
-                ],
-                structuredData: {}
-            },
-            components: ['smheader', 'smfooter', 'subjects'],
-            mixins: mixins
-        }
-    };
-    res.render('index', scope);
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE');
+    next();
 });
 
 app.listen(3000);
