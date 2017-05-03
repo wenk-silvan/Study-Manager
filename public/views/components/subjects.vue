@@ -63,7 +63,7 @@
         <h1 class="h1-responsive">Subjects</h1>
         <hr>
         <div class="row">
-            <div class="subject col-sm-12 col-md-6 col-xl-4 " v-for="subject in subjects">
+            <div class="subject col-sm-12 col-md-6 col-xl-4 " v-for="subject in subjects.data">
                 <div class="card-wrapper" v-if="!subject.detailedView">
                     <div class="card">
                         <div class="img-fluid" :style="{ backgroundImage: 'url(/public/images/' + subject.imageName + ')' }"></div>
@@ -110,6 +110,6 @@
         <button type="button" class="btn btn-outline-success waves-effect btn-add" data-toggle="modal" data-target="#mdAdd">
             <span class="fa fa-plus"></span>
         </button>
-        <button type="button" class="btn btn-outline-default waves-effect btn-file pull-right">Save</button>
+        <button @click="getSubjects()" type="button" class="btn btn-outline-default waves-effect btn-file pull-right">Save</button>
     </div>
 </template>
