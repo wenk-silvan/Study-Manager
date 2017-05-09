@@ -1,7 +1,9 @@
 <template lang="html">
-    <div>
-        <smheader></smheader>
-        <subjects></subjects>
+    <div style="height: 100%;">
+        <div class="wrapper">
+            <smheader></smheader>
+            <subjects></subjects>
+        </div>
         <smfooter></smfooter>
     </div>
 </template>
