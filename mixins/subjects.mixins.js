@@ -1,11 +1,18 @@
 var path = require('path');
+var axios = require('axios');
+var subjectsModel = require('../models/subject.model');
+var subjects = [];
+
+subjectsModel.find(function(err, data) {
+    subjects = data;
+});
 
 module.exports = {
     data(){
         return {
             selectedSubject: {},
             newTask: "",
-            subjects: [],
+            subjects: subjects,
             newSubject : {
                 title: '',
                 imageName: ''
@@ -14,26 +21,48 @@ module.exports = {
     },
     methods: {
         remove: function(subject) {
-            if(subject != undefined) this.subjects.splice(this.subjects.indexOf(subject), 1);
+            var scope = this;
+            axios.delete('/api/subjects/' + subject._id)
+                .then(function() {
+                    if(subject != undefined) {
+                        scope.subjects.splice(scope.subjects.indexOf(subject), 1);
+                        console.log("Removed subject successfully.");
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+
             $(function () {
                 $('#mdRemove').modal('toggle');
             });
         },
         add: function(subject) {
-            console.log(this.subjects);
-            let title = subject.title;
-            if(title === "") title = "Example";
-            let image = subject.imageName;
-            if(image === "") image = "default.png";
-
-            if(subject !== undefined) this.subjects.push({
-                title: title,
+            var scope = this;
+            if(subject.title == "") subject.title = "Example";
+            if(subject.imageName == "") subject.imageName = "default.png";
+            let newSubject = {
+                id: 0,
+                title: subject.title,
                 tasks: [
-                    { name: 'Example', done: true },
+                    { name: 'Task', done: true }
                 ],
-                imageName: image,
+                imageName: subject.imageName,
                 detailedView: false
-            });
+            };
+
+            let body = JSON.stringify(newSubject);
+            axios.post('/api/subjects', body, {headers: {'Content-Type': 'application/json'}})
+                .then(function(response) {
+                    if(subject !== undefined) {
+                        console.log(response.data.message);
+                        newSubject._id = response.data.data;
+                        scope.subjects.push(newSubject);
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
 
             this.newSubject = { title: "", imageName: "" };
 
@@ -52,21 +81,23 @@ module.exports = {
             return count.toString() + " unfinished tasks!";
         },
         getSubjects: function() {
-            this.$http.get('/subjects').then(response => {
-                this.subjects = response.body;
+            this.$http.get('/api/subjects').then(response => {
+                this.subjects = response.data;
             }, response => {
                 return "Server error: " + response;
             });
         },
         addTask: function(task, subject) {
+            var scope = this;
             let name = task;
             if(name === "") name = "Example task";
-            this.subjects[this.subjects.indexOf(subject)].tasks.push({
+            var tasks = this.subjects[this.subjects.indexOf(subject)].tasks;
+            tasks.push({
                 name: name,
                 done: false
             });
+            this.editTask(subject);
             this.newTask = "";
-
             $(function () {
                 $('#mdAddTask').modal('toggle');
             });
@@ -75,9 +106,20 @@ module.exports = {
             if(subject !== undefined && task !== undefined) {
                 let subjectIndex = this.subjects.indexOf(subject);
                 let taskIndex = this.subjects[subjectIndex].tasks.indexOf(task);
-
-                this.subjects[subjectIndex].tasks.splice(taskIndex, 1);
+                var tasks = this.subjects[subjectIndex].tasks;
+                tasks.splice(taskIndex, 1);
+                this.editTask(subject);
             }
+        },
+        editTask: function(subject) {
+            var body  = JSON.stringify({tasks: subject.tasks});
+            axios.put('/api/subjects/tasks/' + subject._id, body, {headers: {'Content-Type': 'application/json'}})
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
     }
 };

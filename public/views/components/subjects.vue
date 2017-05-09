@@ -63,7 +63,7 @@
         <h1 class="h1-responsive">Subjects</h1>
         <hr>
         <div class="row">
-            <div class="subject col-sm-12 col-md-6 col-xl-4 " v-for="subject in subjects.data">
+            <div class="subject col-sm-12 col-md-6 col-xl-4" v-for="subject in subjects">
                 <div class="card-wrapper" v-if="!subject.detailedView">
                     <div class="card">
                         <div class="img-fluid" :style="{ backgroundImage: 'url(/public/images/' + subject.imageName + ')' }"></div>
@@ -94,10 +94,10 @@
                                     <div class="col-7 ">
                                         <div :class="{ strikethrough: task.done }">{{ task.name }}</div>
                                     </div>
-                                    <div class="col-5 btn-status" @click="task.done = !task.done">
+                                    <div class="col-5 btn-status">
                                         <a @click="removeTask(subject, task)" class="btn btn-outline-secondary btn-trash waves-effect waves-light" v-if="task.done"><span class="fa fa-trash-o"></span></a>
-                                        <a class="btn btn-outline-success btn-done waves-effect waves-light" v-if="task.done"><span class="fa fa-check"></span></a>
-                                        <a class="btn btn-outline-secondary btn-todo waves-effect waves-light" v-else><span class="fa fa-times"></span></a>
+                                        <a @click="task.done = false; editTask(subject);" class="btn btn-outline-success btn-done waves-effect waves-light" v-if="task.done"><span class="fa fa-check"></span></a>
+                                        <a @click="task.done = true; editTask(subject);" class="btn btn-outline-secondary btn-todo waves-effect waves-light" v-else><span class="fa fa-times"></span></a>
                                     </div>
                                 </div>
                                 <hr v-if="index !== subject.tasks.length - 1">
@@ -110,6 +110,8 @@
         <button type="button" class="btn btn-outline-success waves-effect btn-add" data-toggle="modal" data-target="#mdAdd">
             <span class="fa fa-plus"></span>
         </button>
-        <button @click="getSubjects()" type="button" class="btn btn-outline-default waves-effect btn-file pull-right">Save</button>
     </div>
 </template>
+
+<script>
+</script>

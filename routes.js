@@ -86,17 +86,17 @@ module.exports = function(app) {
     });
 
     app.put('/api/subjects/tasks/:id', function(req, res) {
-        console.log(req.body);
-        console.log(req.params.id);
         Subject.update({_id: req.params.id}, {
             tasks: req.body.tasks
         },
         function(err, raw) {
             if(err) {
+                console.log("Error while updating tasks of subject: " + req.params.id);
                 return res.status(500).json({
                     message: 'Error while deleting subject: ' + err
                 });
             }
+            console.log("Successfully updated tasks of subject: " + req.params.id);
             res.status(200).json({
                 message: 'Updated subject successfully',
                 raw: raw
