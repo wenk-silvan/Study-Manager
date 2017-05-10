@@ -2,3 +2,6 @@
 node_modules
 .idea
 *.sock
+public/images/binary.jpg
+public/images/
+daemon/
