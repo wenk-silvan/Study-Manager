@@ -1,18 +1,12 @@
 var path = require('path');
 var axios = require('axios');
-var subjectsModel = require('../models/subject.model');
-var subjects = [];
-
-subjectsModel.find(function(err, data) {
-    subjects = data;
-});
 
 module.exports = {
     data(){
         return {
             selectedSubject: {},
             newTask: "",
-            subjects: subjects,
+            subjects: [],
             newSubject : {
                 title: '',
                 imageName: ''
@@ -81,8 +75,9 @@ module.exports = {
             return count.toString() + " unfinished tasks!";
         },
         getSubjects: function() {
-            this.$http.get('/api/subjects').then(response => {
-                this.subjects = response.data;
+            axios.get('/api/subjects').then(response => {
+                this.subjects = response.data.data;
+                console.log(response.data.message);
             }, response => {
                 return "Server error: " + response;
             });
@@ -115,12 +110,15 @@ module.exports = {
             var body  = JSON.stringify({tasks: subject.tasks});
             axios.put('/api/subjects/tasks/' + subject._id, body, {headers: {'Content-Type': 'application/json'}})
                 .then(function(response) {
-                    console.log(response);
+                    console.log(response.data.message);
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
         }
+    },
+    mounted: function(){
+        this.getSubjects();
     }
 };
 

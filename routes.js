@@ -3,11 +3,11 @@ var Subject = require('./models/subject.model');
 
 module.exports = function(app) {
     var pageTitle = 'Study Manager';
-    var mixins = [
-        require(path.join(__dirname, '/mixins/subjects.mixins.js'))
-    ];
 
     app.get('/', function(req, res){
+        var mixins = [
+            require(path.join(__dirname, '/mixins/subjects.mixins.js'))
+        ];
         var scope = {
             data: {
                 title: pageTitle
@@ -41,6 +41,7 @@ module.exports = function(app) {
                     message: 'Error while fetching subjects: ' + err.message
                 });
             }
+            console.log("Successfully got subjects from database");
             res.status(200).json({
                 data: subjects,
                 message: 'Got subjects successfully'
@@ -63,7 +64,7 @@ module.exports = function(app) {
                     message: 'Error while adding subject, server error: ' + err.errors
                 });
             }
-            console.log("Added subject: " + subject);
+            console.log("Added subject successfully to database.");
             res.status(200).json({
                 data: result._id,
                 message: 'Added subject successfully.'
@@ -79,6 +80,7 @@ module.exports = function(app) {
                     message: 'Error while deleting subject: ' + err
                 });
             }
+            console.log("Deleted subject successfully from database.");
             res.status(200).json({
                 message: 'Deleted subject successfully'
             });
