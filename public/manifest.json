@@ -1,0 +1,20 @@
+{
+    "name": "The Study Manager to organize education.",
+    "short_name": "StudyManager",
+    "start_url": ".",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ccc",
+    "theme_color": "#8b6c4c",
+    "icons": [{
+            "src": "/public/images/icon_144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/images/icon_256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ]
+}

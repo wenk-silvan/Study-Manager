@@ -2,12 +2,12 @@ var path = require('path');
 var axios = require('axios');
 
 module.exports = {
-    data(){
+    data() {
         return {
             selectedSubject: {},
             newTask: "",
             subjects: [],
-            newSubject : {
+            newSubject: {
                 title: '',
                 imageName: ''
             }
@@ -18,7 +18,7 @@ module.exports = {
             var scope = this;
             axios.delete('/api/subjects/' + subject._id)
                 .then(function() {
-                    if(subject != undefined) {
+                    if (subject != undefined) {
                         scope.subjects.splice(scope.subjects.indexOf(subject), 1);
                         console.log("Removed subject successfully.");
                     }
@@ -27,14 +27,14 @@ module.exports = {
                     console.log(error);
                 });
 
-            $(function () {
+            $(function() {
                 $('#mdRemove').modal('toggle');
             });
         },
         add: function(subject) {
             var scope = this;
-            if(subject.title == "") subject.title = "Example";
-            if(subject.imageName == "") subject.imageName = "default.png";
+            if (subject.title == "") subject.title = "Example";
+            if (subject.imageName == "") subject.imageName = "default.png";
             let newSubject = {
                 id: 0,
                 title: subject.title,
@@ -46,9 +46,9 @@ module.exports = {
             };
 
             let body = JSON.stringify(newSubject);
-            axios.post('/api/subjects', body, {headers: {'Content-Type': 'application/json'}})
+            axios.post('/api/subjects', body, { headers: { 'Content-Type': 'application/json' } })
                 .then(function(response) {
-                    if(subject !== undefined) {
+                    if (subject !== undefined) {
                         console.log(response.data.message);
                         newSubject._id = response.data.data;
                         scope.subjects.push(newSubject);
@@ -60,18 +60,18 @@ module.exports = {
 
             this.newSubject = { title: "", imageName: "" };
 
-            $(function () {
+            $(function() {
                 $('#mdAdd').modal('toggle');
             });
         },
         getInfoText: function(tasks) {
-            if(tasks === undefined) return "No tasks saved";
+            if (tasks === undefined) return "No tasks saved";
             let count = 0;
-            for(let i = 0; i < tasks.length; i++) {
-                if(!tasks[i].done) count++;
+            for (let i = 0; i < tasks.length; i++) {
+                if (!tasks[i].done) count++;
             }
-            if(count == 0) return "Nothing to do here!";
-            if(count == 1) return "One unfinished task!";
+            if (count == 0) return "Nothing to do here!";
+            if (count == 1) return "One unfinished task!";
             return count.toString() + " unfinished tasks!";
         },
         getSubjects: function() {
@@ -85,7 +85,7 @@ module.exports = {
         addTask: function(task, subject) {
             var scope = this;
             let name = task;
-            if(name === "") name = "Example task";
+            if (name === "") name = "Example task";
             var tasks = this.subjects[this.subjects.indexOf(subject)].tasks;
             tasks.push({
                 name: name,
@@ -93,12 +93,12 @@ module.exports = {
             });
             this.editTask(subject);
             this.newTask = "";
-            $(function () {
+            $(function() {
                 $('#mdAddTask').modal('toggle');
             });
         },
         removeTask: function(subject, task) {
-            if(subject !== undefined && task !== undefined) {
+            if (subject !== undefined && task !== undefined) {
                 let subjectIndex = this.subjects.indexOf(subject);
                 let taskIndex = this.subjects[subjectIndex].tasks.indexOf(task);
                 var tasks = this.subjects[subjectIndex].tasks;
@@ -107,8 +107,8 @@ module.exports = {
             }
         },
         editTask: function(subject) {
-            var body  = JSON.stringify({tasks: subject.tasks});
-            axios.put('/api/subjects/tasks/' + subject._id, body, {headers: {'Content-Type': 'application/json'}})
+            var body = JSON.stringify({ tasks: subject.tasks });
+            axios.put('/api/subjects/tasks/' + subject._id, body, { headers: { 'Content-Type': 'application/json' } })
                 .then(function(response) {
                     console.log(response.data.message);
                 })
@@ -117,8 +117,7 @@ module.exports = {
                 });
         }
     },
-    mounted: function(){
+    mounted: function() {
         this.getSubjects();
     }
 };
-

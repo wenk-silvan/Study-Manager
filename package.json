@@ -1,36 +1,36 @@
 {
-  "name": "express-vue-super-simple",
-  "version": "1.0.0",
-  "description": "super simple example for express-vue",
-  "main": "index.js",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/danmademe/express-vue-super-simple.git"
-  },
-  "author": "Daniel Cherubini",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/danmademe/express-vue/issues"
-  },
-  "homepage": "https://github.com/danmademe/express-vue-super-simple#readme",
-  "dependencies": {
-    "axios": "^0.16.1",
-    "body-parser": "^1.17.1",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.2",
-    "express-vue": "^3.9.6",
-    "font-awesome": "^4.7.0",
-    "mdbootstrap": "^4.3.1",
-    "mongoose": "^4.9.7",
-    "morgan": "^1.8.1",
-    "serve-favicon": "^2.4.2",
-    "vue-axios": "^2.0.2"
-  }
+    "name": "express-vue-super-simple",
+    "version": "1.0.0",
+    "description": "super simple example for express-vue",
+    "main": "index.js",
+    "directories": {
+        "example": "examples"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/danmademe/express-vue-super-simple.git"
+    },
+    "author": "Daniel Cherubini",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/danmademe/express-vue/issues"
+    },
+    "homepage": "https://github.com/danmademe/express-vue-super-simple#readme",
+    "dependencies": {
+        "axios": "^0.16.1",
+        "body-parser": "^1.17.1",
+        "cookie-parser": "^1.4.3",
+        "express": "^4.15.2",
+        "express-vue": "^3.9.6",
+        "font-awesome": "^4.7.0",
+        "mdbootstrap": "^4.3.1",
+        "mongoose": "^4.9.7",
+        "morgan": "^1.8.1",
+        "serve-favicon": "^2.4.2",
+        "vue-axios": "^2.0.2"
+    }
 }
